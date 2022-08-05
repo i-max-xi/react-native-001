@@ -1,13 +1,26 @@
 import { StatusBar } from 'expo-status-bar';
+import { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { TextInput } from 'react-native-web';
 
 export default function App() {
+  const [name, setName] = useState('Shaun');
+  const [age, setAge] = useState('30');
+
+ 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.boldText}>Hello World!</Text>
-      </View>
-      {/* <StatusBar style="auto" /> */}
+     <Text>His name is {name} and his age is {age}</Text>
+     <Text>Enter name</Text>
+     <TextInput
+      style={styles.input}
+      multilne
+      placeholder='e.g. John Doe'
+      onChange={(val) => setName(val)} />
+    <TextInput
+      style={styles.input}
+      keyboardType = 'numeric'
+      onChange={(val) => setAge(val)} />
     </View>
   );
 }
@@ -19,11 +32,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  header: {
-    backgroundColor: 'pink',
-    padding: 20,
-  },
-  boldText: {
-    fontWeight: 'bold',
-  },
+  input: {
+    borderWidth: 1,
+    borderColor: '#777',
+    padding: 8,
+    margin: 10,
+    width: 200,
+
+  }
 });
