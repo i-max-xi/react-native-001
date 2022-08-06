@@ -1,26 +1,38 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { TextInput } from 'react-native-web';
+import { FlatList, ScrollView, TextInput } from 'react-native-web';
 
 export default function App() {
-  const [name, setName] = useState('Shaun');
-  const [age, setAge] = useState('30');
+  const [people, setPeople] = useState([
+    {name: 'Shaun', key: '1'},
+    {name: 'Yoshi', key: '2'},
+    {name: 'Marid', key: '3'},
+    {name: 'luigi', key: '4'},
+    {name: 'peach', key: '5'},
+    {name: 'toad', key: '6'},
+    {name: 'browser', key: '7'},
 
+  ])
  
   return (
     <View style={styles.container}>
-     <Text>His name is {name} and his age is {age}</Text>
-     <Text>Enter name</Text>
-     <TextInput
-      style={styles.input}
-      multilne
-      placeholder='e.g. John Doe'
-      onChange={(val) => setName(val)} />
-    <TextInput
-      style={styles.input}
-      keyboardType = 'numeric'
-      onChange={(val) => setAge(val)} />
+      <FlatList
+      numColumns={2}
+      data={people}
+      renderItem={({ item }) => (
+        <Text style={styles.item}>{item.name}</Text>
+      )} />
+
+      {/* <ScrollView>
+        {people.map((item) => {
+          return (
+            <View key={item.key}>
+              <Text style={styles.lists}>{item.name}</Text>
+            </View>
+          )
+      })}
+      </ScrollView> */}
     </View>
   );
 }
@@ -29,15 +41,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    padding: 40,
+    // alignItems: 'center',
+    // justifyContent: 'center',
   },
-  input: {
-    borderWidth: 1,
-    borderColor: '#777',
-    padding: 8,
-    margin: 10,
-    width: 200,
-
+  item : {
+    padding: 10,
+    backgroundColor: 'pink',
+    margin: 2,
+    marginHorizontal: 10,
   }
 });
